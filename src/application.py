@@ -3,6 +3,7 @@
 
 import sys
 
+
 class App:
     ''' Controlador do programa.
     '''

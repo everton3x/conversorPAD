@@ -8,6 +8,7 @@ from tkinter import (Tk, LEFT, N, W, E, RIGHT, BOTTOM,
 from tkinter import filedialog
 from tkinter.ttk import Progressbar
 
+
 class Window(Tk):
     ''' Janela principal do programa.
     '''
@@ -34,15 +35,15 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         form = Frame(self, padx=10, pady=10)
         form.pack()
 
-        self.build_source_field(form) # Seletor do diretório de origem
-        self.build_output_field(form) # Seletor do diretório de destino
-        self.build_output_format(form) # Seleção de formatos de saída
-        self.build_progress_bar(form) # Barra de progresso
-        self.build_start_button(form) # Botão de conversão
-        self.build_info_box(form) # Caixa de informações
-        self.build_status_bar() # Barra de status
+        self._build_source_field(form)  # Seletor do diretório de origem
+        self._build_output_field(form)  # Seletor do diretório de destino
+        self._build_output_format(form)  # Seleção de formatos de saída
+        self._build_progress_bar(form)  # Barra de progresso
+        self._build_start_button(form)  # Botão de conversão
+        self._build_info_box(form)  # Caixa de informações
+        self._build_status_bar()  # Barra de status
 
-    def build_source_field(self, form):
+    def _build_source_field(self, form):
         ''' Seletor de diretório de origem
         '''
         self.source_field_label = Label(form, text='Diretório dos dados:', anchor=W)
@@ -55,10 +56,10 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
                                         textvariable=self.source_dir, width=100)
         self.source_field_input.grid(row=0, column=1)
 
-        self.source_field_button = Button(form, text='Selecionar', command=self.choose_source_dir)
+        self.source_field_button = Button(form, text='Selecionar', command=self._choose_source_dir)
         self.source_field_button.grid(row=0, column=2)
 
-    def build_output_field(self, form):
+    def _build_output_field(self, form):
         ''' Seletor de diretório de saída
         '''
         self.output_field_label = Label(form, text='Diretório de destino:', anchor=W)
@@ -71,10 +72,10 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
                                         textvariable=self.output_dir, width=100)
         self.output_field_input.grid(row=1, column=1)
 
-        self.output_field_button = Button(form, text='Selecionar', command=self.choose_output_dir)
+        self.output_field_button = Button(form, text='Selecionar', command=self._choose_output_dir)
         self.output_field_button.grid(row=1, column=2)
 
-    def build_output_format(self, form):
+    def _build_output_format(self, form):
         ''' Seletor de formato de saída
         '''
         self.output_format_label = Label(form, text='Formatos de saída:', anchor=W)
@@ -92,7 +93,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
             radio.pack(anchor=W)
             radio.deselect()
 
-    def build_progress_bar(self, form):
+    def _build_progress_bar(self, form):
         ''' Barra de progresso
         '''
         self.progress_label = Label(form, text='Progresso', anchor=W)
@@ -105,13 +106,13 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
                                         orient=HORIZONTAL, variable=self.progress)
         self.progress_bar.grid(row=3, column=1, sticky=W+E)
 
-    def build_start_button(self, form):
+    def _build_start_button(self, form):
         ''' Botão de início da conversão
         '''
-        self.start_button = Button(form, text='Converter', command=self.start)
+        self.start_button = Button(form, text='Converter', command=self._start)
         self.start_button.grid(row=3, column=2)
 
-    def build_info_box(self, form):
+    def _build_info_box(self, form):
         ''' Caixa de informações
         '''
         self.info = StringVar()
@@ -119,7 +120,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.info_label = Label(form, textvariable=self.info, relief=GROOVE, anchor=W)
         self.info_label.grid(row=4, column=1, sticky=W+E)
 
-    def build_status_bar(self):
+    def _build_status_bar(self):
         ''' Barra de status
         '''
         self.status_bar = Frame(self, relief=GROOVE)
@@ -143,7 +144,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.mainloop()
         return 0
 
-    def choose_source_dir(self):
+    def _choose_source_dir(self):
         ''' Pede o diretório de origem
         '''
         options = {
@@ -154,7 +155,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         selected = filedialog.askdirectory(**options)
         self.source_dir.set(selected)
 
-    def choose_output_dir(self):
+    def _choose_output_dir(self):
         ''' Pede o diretório de destino
         '''
         options = {
@@ -165,7 +166,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         selected = filedialog.askdirectory(**options)
         self.output_dir.set(selected)
 
-    def start(self):
+    def _start(self):
         ''' Inicia a conversão
         '''
         self.app.convert()
