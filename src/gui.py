@@ -38,6 +38,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self._build_source_field(form)  # Seletor do diretório de origem
         self._build_output_field(form)  # Seletor do diretório de destino
         self._build_output_format(form)  # Seleção de formatos de saída
+        self._build_output_name(form)  # Nome do arquivo de saída
         self._build_progress_bar(form)  # Barra de progresso
         self._build_start_button(form)  # Botão de conversão
         self._build_info_box(form)  # Caixa de informações
@@ -93,24 +94,36 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
             radio.pack(anchor=W)
             radio.deselect()
 
+    def _build_output_name(self, form):
+        ''' Campo para nome da saída
+        '''
+        self.output_name_field_label = Label(form, text='Nome dos arquivos de saída:', anchor=W)
+        self.output_name_field_label.grid(row=3, column=0, sticky=W)
+
+        self.output_name = StringVar()
+        self.output_name.set('')
+
+        self.output_name_field_input = Entry(form, textvariable=self.output_name, width=100)
+        self.output_name_field_input.grid(row=3, column=1)
+
     def _build_progress_bar(self, form):
         ''' Barra de progresso
         '''
         self.progress_label = Label(form, text='Progresso', anchor=W)
-        self.progress_label.grid(row=3, column=0, sticky=W)
+        self.progress_label.grid(row=4, column=0, sticky=W)
 
         self.progress = DoubleVar()
         self.progress.set(0)
 
         self.progress_bar = Progressbar(form, maximum=100,
                                         orient=HORIZONTAL, variable=self.progress)
-        self.progress_bar.grid(row=3, column=1, sticky=W+E)
+        self.progress_bar.grid(row=4, column=1, sticky=W+E)
 
     def _build_start_button(self, form):
         ''' Botão de início da conversão
         '''
         self.start_button = Button(form, text='Converter', command=self._start)
-        self.start_button.grid(row=3, column=2)
+        self.start_button.grid(row=4, column=2)
 
     def _build_info_box(self, form):
         ''' Caixa de informações
@@ -118,7 +131,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.info = StringVar()
         self.info.set('Configure e inicie a conversão...')
         self.info_label = Label(form, textvariable=self.info, relief=GROOVE, anchor=W)
-        self.info_label.grid(row=4, column=1, sticky=W+E)
+        self.info_label.grid(row=5, column=1, sticky=W+E)
 
     def _build_status_bar(self):
         ''' Barra de status
