@@ -4,7 +4,7 @@
 from tkinter import (Tk, LEFT, N, W, E, RIGHT, BOTTOM,
                      StringVar, DISABLED, Entry, Label, Frame,
                      Button, Radiobutton, DoubleVar, GROOVE,
-                     CENTER, Message, X, HORIZONTAL)
+                     CENTER, Message, X, HORIZONTAL, messagebox)
 from tkinter import filedialog
 from tkinter.ttk import Progressbar
 
@@ -51,7 +51,8 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.source_field_label.grid(row=0, column=0, sticky=W)
 
         self.source_dir = StringVar()
-        self.source_dir.set('')
+        # self.source_dir.set('')
+        self.source_dir.set(r'M:\abase\ARQUIVOSPAD\2018\BIMESTRE1')
 
         self.source_field_input = Entry(form, state=DISABLED,
                                         textvariable=self.source_dir, width=100)
@@ -67,7 +68,8 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.output_field_label.grid(row=1, column=0, sticky=W)
 
         self.output_dir = StringVar()
-        self.output_dir.set('')
+        # self.output_dir.set('')
+        self.output_dir.set(r'C:\Users\Everton\Desktop')
 
         self.output_field_input = Entry(form, state=DISABLED,
                                         textvariable=self.output_dir, width=100)
@@ -101,7 +103,8 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.output_name_field_label.grid(row=3, column=0, sticky=W)
 
         self.output_name = StringVar()
-        self.output_name.set('')
+        # self.output_name.set('')
+        self.output_name.set('teste_conversor_pad')
 
         self.output_name_field_input = Entry(form, textvariable=self.output_name, width=100)
         self.output_name_field_input.grid(row=3, column=1)
@@ -183,3 +186,10 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         ''' Inicia a conversão
         '''
         self.app.convert()
+
+    @staticmethod
+    def show_error(text):
+        ''' Exibe um pop up com uma mensagem de erro.
+        '''
+
+        messagebox.showerror('Um erro ocorreu!', text)
