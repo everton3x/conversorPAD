@@ -90,7 +90,7 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         self.output_format = StringVar()
         self.output_format.set('')
 
-        for label in ('XML', 'CSV'):
+        for label in ('XLSX', 'XLS', 'CSV'):
             radio = Radiobutton(formats_frame, text=label,
                                 value=label, variable=self.output_format, tristatevalue=0)
             radio.pack(anchor=W)
