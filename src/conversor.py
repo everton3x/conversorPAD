@@ -9,7 +9,8 @@ Este arquivo é o módulo principal que chama o módulo Controller.
 Este software é distribuído sob a licença MIT.
 
 '''
-
+import sys
+import os
 import gui
 import application
 

@@ -82,7 +82,12 @@ class App:
 
             self.processing = os.path.basename(source)
             self.percentage += increment
-            self.gui.after(100, self._update_progress)
+            # self.gui.after(100, self._update_progress)
+            self._update_progress()
+            # self.gui.update_idletasks()
+            self.gui.update()
+
+        self.gui.finish()
 
         return None
 

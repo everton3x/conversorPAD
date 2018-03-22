@@ -4,7 +4,7 @@
 from tkinter import (Tk, LEFT, N, W, E, RIGHT, BOTTOM,
                      StringVar, DISABLED, Entry, Label, Frame,
                      Button, Radiobutton, DoubleVar, GROOVE,
-                     CENTER, Message, X, HORIZONTAL, messagebox)
+                     CENTER, Message, X, HORIZONTAL, messagebox, NORMAL)
 from tkinter import filedialog
 from tkinter.ttk import Progressbar
 
@@ -185,6 +185,11 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
     def _start(self):
         ''' Inicia a conversão
         '''
+        self.start_button.config(state=DISABLED)
+        self.source_field_button.config(state=DISABLED)
+        self.output_field_button.config(state=DISABLED)
+        self.info.set('Processamento iniciado...')
+        self.progress.set(0)
         self.app.convert()
 
     @staticmethod
@@ -193,3 +198,18 @@ Basicamente, o programa pega os dados e os converte para um formato diferente.
         '''
 
         messagebox.showerror('Um erro ocorreu!', text)
+    
+    @staticmethod
+    def show_info(text):
+        ''' Exibe um pop up com uma mensagem de informação.
+        '''
+
+        messagebox.showinfo('Atenção!', text)
+
+    def finish(self):
+        self.start_button.config(state=NORMAL)
+        self.source_field_button.config(state=NORMAL)
+        self.output_field_button.config(state=NORMAL)
+        self.info.set('Processamento terminado!')
+        self.progress.set(100)
+        self.show_info('Processo terminado')
