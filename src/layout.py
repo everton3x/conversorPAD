@@ -3,34 +3,38 @@
 
 class Layout:
 
+    TYPE_INT = 'int64'
+    TYPE_STR = 'str'
+    TYPE_DATE = 'datetime64[ns]'
+
     def __init__(self):
         # arquivo: {
         #   (id_coluna, tipo, primeira coluna, ultima coluna, formatador)
         # }
         self.specs = {
             'empenho': [
-                ('orgao', 'int', 1, 2, None),
-                ('uniorcam', 'int', 3, 4, None),
-                ('funcao', 'int', 5, 6, None),
-                ('subfuncao', 'int', 7, 9, None),
-                ('programa', 'int', 10, 13, None),
-                ('projativop', 'int', 17, 21, None),
-                ('ndo', 'int64', 22, 36, None),
-                ('rv', 'int', 37, 40, None),
-                ('contrapartida', 'int', 41, 44, None),
-                ('nr_empenho', 'int64', 45, 57, None),
-                ('data_empenho', 'datetime64[ns]', 58, 65, None),
+                ('orgao', self.TYPE_INT, 1, 2, None),
+                ('uniorcam', self.TYPE_INT, 3, 4, None),
+                ('funcao', self.TYPE_INT, 5, 6, None),
+                ('subfuncao', self.TYPE_INT, 7, 9, None),
+                ('programa', self.TYPE_INT, 10, 13, None),
+                ('projativop', self.TYPE_INT, 17, 21, None),
+                ('ndo', self.TYPE_INT, 22, 36, None),
+                ('rv', self.TYPE_INT, 37, 40, None),
+                ('contrapartida', self.TYPE_INT, 41, 44, None),
+                ('nr_empenho', self.TYPE_INT, 45, 57, None),
+                ('data_empenho', self.TYPE_DATE, 58, 65, None),
                 ('valor_empenho', None, 66, 78, Converters.valor),
-                ('sinal_valor', 'str', 79, 79, None),
-                ('credor', 'int', 80, 89, None),
-                ('cp', 'int', 255, 257, None),
-                ('reg_preco', 'str', 260, 260, None),
-                ('nr_licit', 'int', 281, 300, None),
-                ('ano_licit', 'int', 301, 304, None),
-                ('historico', 'str', 305, 704, None),
-                ('modal_contrat', 'str', 705, 707, None),
-                ('base_legal', 'str', 708, 709, None),
-                ('identificador_folha', 'str', 710, 710, None)
+                ('sinal_valor', self.TYPE_STR, 79, 79, None),
+                ('credor', self.TYPE_INT, 80, 89, None),
+                ('cp', self.TYPE_INT, 255, 257, None),
+                ('reg_preco', self.TYPE_STR, 260, 260, None),
+                ('nr_licit', self.TYPE_INT, 281, 300, None),
+                ('ano_licit', self.TYPE_INT, 301, 304, None),
+                ('historico', self.TYPE_STR, 305, 704, None),
+                ('modal_contrat', self.TYPE_STR, 705, 707, None),
+                ('base_legal', self.TYPE_STR, 708, 709, None),
+                ('identificador_folha', self.TYPE_STR, 710, 710, None)
             ]
         }
 
