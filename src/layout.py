@@ -9,28 +9,28 @@ class Layout:
         # }
         self.specs = {
             'empenho': [
-                ('orgao', 'int', 1, 2, ''),
-                ('uniorcam', 'int', 3, 4, ''),
-                ('funcao', 'int', 5, 6, ''),
-                ('subfuncao', 'int', 7, 9, ''),
-                ('programa', 'int', 10, 13, ''),
-                ('projativop', 'int', 17, 21, ''),
-                ('ndo', 'int64', 22, 36, ''),
-                ('rv', 'int', 37, 40, ''),
-                ('contrapartida', 'int', 41, 44, ''),
-                ('nr_empenho', 'int64', 45, 57, ''),
-                ('data_empenho', 'datetime64[ns]', 58, 65, ''),
+                ('orgao', 'int', 1, 2, None),
+                ('uniorcam', 'int', 3, 4, None),
+                ('funcao', 'int', 5, 6, None),
+                ('subfuncao', 'int', 7, 9, None),
+                ('programa', 'int', 10, 13, None),
+                ('projativop', 'int', 17, 21, None),
+                ('ndo', 'int64', 22, 36, None),
+                ('rv', 'int', 37, 40, None),
+                ('contrapartida', 'int', 41, 44, None),
+                ('nr_empenho', 'int64', 45, 57, None),
+                ('data_empenho', 'datetime64[ns]', 58, 65, None),
                 ('valor_empenho', None, 66, 78, Converters.valor),
-                ('sinal_valor', 'str', 79, 79, ''),
-                ('credor', 'int', 80, 89, ''),
-                ('cp', 'int', 255, 257, ''),
-                ('reg_preco', 'str', 260, 260, ''),
-                ('nr_licit', 'int', 281, 300, ''),
-                ('ano_licit', 'int', 301, 304, ''),
-                ('historico', 'str', 305, 704, ''),
-                ('modal_contrat', 'str', 705, 707, ''),
-                ('base_legal', 'str', 708, 709, ''),
-                ('identificador_folha', 'str', 710, 710, '')
+                ('sinal_valor', 'str', 79, 79, None),
+                ('credor', 'int', 80, 89, None),
+                ('cp', 'int', 255, 257, None),
+                ('reg_preco', 'str', 260, 260, None),
+                ('nr_licit', 'int', 281, 300, None),
+                ('ano_licit', 'int', 301, 304, None),
+                ('historico', 'str', 305, 704, None),
+                ('modal_contrat', 'str', 705, 707, None),
+                ('base_legal', 'str', 708, 709, None),
+                ('identificador_folha', 'str', 710, 710, None)
             ]
         }
 
@@ -48,7 +48,7 @@ class Layout:
         converters = {}
         for row in self.specs[file]:
             name, _, _, _, conv = row
-            if conv != '':
+            if conv is not None:
                 converters[name] = conv
 
         return converters

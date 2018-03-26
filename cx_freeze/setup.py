@@ -42,7 +42,8 @@ setup(
             'include_files': [
                 os.path.join(freeze_directory, 'conversor.ico'),
                 r'C:\Program Files (x86)\Python36-32\DLLs\tcl86t.dll',# Previne erros relacionados a falta do TCL
-                r'C:\Program Files (x86)\Python36-32\DLLs\tk86t.dll'# Previne erros relacionados a falta do TK
+                r'C:\Program Files (x86)\Python36-32\DLLs\tk86t.dll',# Previne erros relacionados a falta do TK
+                r'C:\Program Files (x86)\Python36-32\DLLs\sqlite3.dll',# Previne erros relacionados a falta do SQLite3
             ],
             'path': sys.path + [src_directory]
         }
