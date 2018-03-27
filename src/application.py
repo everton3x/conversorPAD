@@ -3,6 +3,7 @@
 
 import sys
 import os
+from tkinter import NORMAL
 from datetime import datetime
 from layout import *
 # from pandas import *
@@ -36,16 +37,25 @@ class App:
         if not os.path.exists(self.gui.source_dir.get()):
             self.gui.show_error('Diretório de origem {} não \
             encontrado!'.format(self.gui.source_dir.get()))
+            self.gui.start_button.config(state=NORMAL)
+            self.gui.source_field_button.config(state=NORMAL)
+            self.gui.output_field_button.config(state=NORMAL)
             return
 
         if not os.path.exists(self.gui.output_dir.get()):
             self.gui.show_error('Diretório de destino {} não \
             encontrado!'.format(self.gui.output_dir.get()))
+            self.gui.start_button.config(state=NORMAL)
+            self.gui.source_field_button.config(state=NORMAL)
+            self.gui.output_field_button.config(state=NORMAL)
             return
 
         if self.gui.output_name.get() == '':
             self.gui.show_error('Nome do arquivo de saída {} \
             não é válido!'.format(self.gui.output_name.get()))
+            self.gui.start_button.config(state=NORMAL)
+            self.gui.source_field_button.config(state=NORMAL)
+            self.gui.output_field_button.config(state=NORMAL)
             return
 
         if self.gui.output_format.get() == 'CSV':
@@ -57,6 +67,9 @@ class App:
         else:
             self.gui.show_error('O formato de saída {} \
             não é válido!'.format(self.gui.output_format.get()))
+            self.gui.start_button.config(state=NORMAL)
+            self.gui.source_field_button.config(state=NORMAL)
+            self.gui.output_field_button.config(state=NORMAL)
             return
 
         self.sourceFiles = [os.path.join(self.gui.source_dir.get(), filename)
@@ -115,7 +128,7 @@ class App:
             os.makedirs(output_path)
 
         data.to_csv(os.path.join(output_path, self.inprocess + '.csv'),
-                    sep=';', encoding=os.device_encoding(1), index=False, date_format='%d/%m/%Y', float_format='%.2f', decimal=',')
+                    sep=';', index=False, date_format='%d/%m/%Y', float_format='%.2f', decimal=',')
 
     def _save_to_xlsx(self, data):
         output_path = os.path.join(
@@ -136,7 +149,7 @@ class App:
         # self.get_excel_writer(filename).save()
 
     def get_excel_writer(self, filename):
-        print(self.writer)
+        # print(self.writer)
         if self.writer is None:
             # self.writer = pd.ExcelWriter(filename, engine='xlsxwriter')
             self.writer = pd.ExcelWriter(filename)

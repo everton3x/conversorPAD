@@ -23,7 +23,7 @@ if sys.platform == 'win32':
 setup(
     name='Conversor do PAD',
     description='Um conversor de layout para os arquivos TXT do PAD',
-    version='0.2',
+    version='1.0',
     executables=[Executable(
         os.path.join(src_directory, 'conversor.py'),
         base=base,
