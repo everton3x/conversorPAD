@@ -31,10 +31,27 @@ class Layout:
                 ('reg_preco', self.TYPE_STR, 260, 260, None),
                 ('nr_licit', self.TYPE_INT, 281, 300, None),
                 ('ano_licit', self.TYPE_INT, 301, 304, None),
-                ('historico', self.TYPE_STR, 305, 704, None),
+                ('historico_empenho', self.TYPE_STR, 305, 704, None),
                 ('modal_contrat', self.TYPE_STR, 705, 707, None),
                 ('base_legal', self.TYPE_STR, 708, 709, None),
                 ('identificador_folha', self.TYPE_STR, 710, 710, None)
+            ],
+            'liquidac': [
+                ('nr_empenho', self.TYPE_INT, 1, 13, None),
+                ('nr_liquidacao', self.TYPE_INT, 14, 33, None),
+                ('data_liquidacao', self.TYPE_DATE, 34, 41, None),
+                ('valor_liquidacao', None, 42, 54, Converters.valor),
+                ('sinal_valor', self.TYPE_STR, 55, 55, None),
+                ('cod_operacao', self.TYPE_STR, 221, 250, None),
+                ('historico_liquidacao', self.TYPE_STR, 251, 650, None),
+                ('existe_contrato', self.TYPE_STR, 651, 651, None),
+                ('nr_contrato_tce', self.TYPE_INT, 652, 671, None),
+                ('nr_contrato', self.TYPE_STR, 672, 691, None),
+                ('ano_contrato', self.TYPE_INT, 692,695 , None),
+                ('existe_nf', self.TYPE_STR, 696, 696, None),
+                ('nr_nf', self.TYPE_INT, 697, 705, None),
+                ('serie_nf', self.TYPE_STR, 706, 708, None),
+                ('tipo_contrato', self.TYPE_STR, 709, 709, None)
             ]
         }
 

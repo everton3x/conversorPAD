@@ -5,8 +5,8 @@ import sys
 import os
 from datetime import datetime
 from layout import *
-from pandas import *
-
+# from pandas import *
+import pandas as pd
 
 class App:
     ''' Controlador do programa.
@@ -73,8 +73,8 @@ class App:
             if not layout.has_layout(self.inprocess):
                 data = False
             else:
-                data = read_fwf(source, colspecs=layout.colspecs(
-                    self.inprocess), names=layout.names(self.inprocess), skiprows=1, skipfooter=1, dtype=layout.dtypes(self.inprocess), parse_dates=layout.date_cols(self.inprocess), date_parser=self.date_parser, converters=layout.converters(self.inprocess))
+                data = pd.read_fwf(source, colspecs=layout.colspecs(
+                    self.inprocess), names=layout.names(self.inprocess), skiprows=1, skipfooter=1, dtype=layout.dtypes(self.inprocess), parse_dates=layout.date_cols(self.inprocess), date_parser=self.date_parser, converters=layout.converters(self.inprocess), na_filter=False)
             if data is not False:
                 self._save_output(data)
             else:
@@ -86,6 +86,10 @@ class App:
             self._update_progress()
             # self.gui.update_idletasks()
             self.gui.update()
+
+        if self.writer is not None:
+            self.writer.save()
+            self.writer = None
 
         self.gui.finish()
 
@@ -103,7 +107,6 @@ class App:
             self._save_to_xlsx(data)
         elif self.gui.output_format.get() == 'XLS':
             self._save_to_xls(data)
-        
 
     def _save_to_csv(self, data):
         output_path = os.path.join(
@@ -113,13 +116,28 @@ class App:
 
         data.to_csv(os.path.join(output_path, self.inprocess + '.csv'),
                     sep=';', encoding=os.device_encoding(1), index=False, date_format='%d/%m/%Y', float_format='%.2f', decimal=',')
-    
+
     def _save_to_xlsx(self, data):
         output_path = os.path.join(
             self.gui.output_dir.get(), self.gui.output_name.get() + '.xlsx')
-        data.to_excel(output_path, index=False, float_format='%.2f', sheet_name=self.inprocess)
-    
+        # data.to_excel(output_path, index=False, float_format='%.2f', sheet_name=self.inprocess)
+        self._save_to_excel(data, output_path)
+        # self.get_excel_writer(output_path).save()
+
     def _save_to_xls(self, data):
         output_path = os.path.join(
             self.gui.output_dir.get(), self.gui.output_name.get() + '.xls')
-        data.to_excel(output_path, index=False, float_format='%.2f', sheet_name=self.inprocess)
+        self._save_to_excel(data, output_path)
+        # self.get_excel_writer(output_path).save()
+        # data.to_excel(output_path, index=False, float_format='%.2f', sheet_name=self.inprocess)
+
+    def _save_to_excel(self, data, filename):
+        data.to_excel(self.get_excel_writer(filename), index=False, float_format='%.2f', sheet_name=self.inprocess)
+        # self.get_excel_writer(filename).save()
+
+    def get_excel_writer(self, filename):
+        print(self.writer)
+        if self.writer is None:
+            # self.writer = pd.ExcelWriter(filename, engine='xlsxwriter')
+            self.writer = pd.ExcelWriter(filename)
+        return self.writer
