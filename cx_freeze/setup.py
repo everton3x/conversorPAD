@@ -42,6 +42,8 @@ setup(
             "packages": [
                 'tkinter',
                 'numpy',
+                'openpyxl',
+                'xlwt',
                 'gui',
             ],
             'include_msvcr': True,
