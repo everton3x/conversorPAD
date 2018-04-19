@@ -41,6 +41,7 @@ setup(
         "build_exe": {
             "packages": [
                 'tkinter',
+                'numpy',
                 'gui',
             ],
             'include_msvcr': True,
