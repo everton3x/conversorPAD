@@ -60,9 +60,9 @@ class Layout:
                 ('valor_pagamento', None, 42, 54, Converters.valor),
                 ('sinal_valor', self.TYPE_STR, 55, 55, None),
                 ('cod_operacao', self.TYPE_STR, 176, 205, None),
-                ('conta_debito', self.TYPE_INT, 206, 225, None),
+                ('conta_debito', None, 206, 225, Converters.conta),
                 ('uniorcam_debito', self.TYPE_INT, 226, 229, None),
-                ('conta_credito', self.TYPE_INT, 230, 249, None),
+                ('conta_credito', None, 230, 249, Converters.conta),
                 ('uniorcam_credito', self.TYPE_INT, 250, 253, None),
                 ('historico_pagamento', self.TYPE_STR, 254, 653, None),
                 ('nr_liquidacao', self.TYPE_INT, 654, 673, None),
@@ -128,7 +128,7 @@ class Layout:
                 ('previsao_termino', None, 201, 213, Converters.valor)
             ],
             'bal_ver': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('anterior_debito', None, 25, 37, Converters.valor),
                 ('anterior_credito', None, 38, 50, Converters.valor),
@@ -145,7 +145,7 @@ class Layout:
                 ('rv', self.TYPE_INT, 258, 261, None),
             ],
             'bver_enc': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('anterior_debito', None, 25, 37, Converters.valor),
                 ('anterior_credito', None, 38, 50, Converters.valor),
@@ -162,7 +162,7 @@ class Layout:
                 ('rv', self.TYPE_INT, 258, 261, None),
             ],
             'rd_extra': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('valor', None, 25, 37, Converters.valor),
                 ('identificador', self.TYPE_STR, 38, 38, None),
@@ -236,7 +236,7 @@ class Layout:
                 ('pago_6bim', None, 228, 238, Converters.valor)
             ],
             'bver_ant': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('anterior_debito', None, 25, 37, Converters.valor),
                 ('anterior_credito', None, 38, 50, Converters.valor),
@@ -252,7 +252,7 @@ class Layout:
                 ('superavit', self.TYPE_STR, 257, 257, None)
             ],
             'bvmovant': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('debito_1bim', None, 25, 37, Converters.valor),
                 ('credito_1bim', None, 38, 50, Converters.valor),
@@ -329,7 +329,7 @@ class Layout:
                 ('tipo_pessoa', self.TYPE_INT, 237, 238, None)
             ],
             'cta_disp': [
-                ('conta', self.TYPE_INT, 1, 20, None),
+                ('conta', None, 1, 20, Converters.conta),
                 ('uniorcam', self.TYPE_INT, 21, 24, None),
                 ('rv', self.TYPE_INT, 25, 28, None),
                 ('banco', self.TYPE_INT, 29, 33, None),
@@ -346,7 +346,7 @@ class Layout:
                 ('rv', self.TYPE_INT, 53, 56, None),
                 ('nro', self.TYPE_INT, 57, 76, None),
                 ('uniorcam_receita', self.TYPE_INT, 77, 80, None),
-                ('conta', self.TYPE_INT, 81, 100, None),
+                ('conta', None, 81, 100, Converters.conta),
                 ('uniorcam_conta', self.TYPE_INT, 101, 104, None)
             ]
         }
@@ -360,7 +360,7 @@ class Layout:
 
         # print(date_cols)
         return date_cols
-    
+
     def converters(self, file):
         converters = {}
         for row in self.specs[file]:
@@ -409,3 +409,7 @@ class Converters:
         reais = int(original[0:len(original) - 2])
         centavos = original[len(original) - 2:]
         return float('{0}.{1}'.format(reais, centavos))
+
+    @staticmethod
+    def conta(original):
+        return original.lstrip('0').ljust(20,'0')
