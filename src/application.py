@@ -89,6 +89,7 @@ class App:
                 data = pd.read_fwf(source, colspecs=layout.colspecs(
                     self.inprocess), names=layout.names(self.inprocess), skiprows=1, skipfooter=1, dtype=layout.dtypes(self.inprocess), parse_dates=layout.date_cols(self.inprocess), date_parser=self.date_parser, converters=layout.converters(self.inprocess), na_filter=False)
             if data is not False:
+                data = data.applymap(lambda x: x.encode('unicode_escape').decode('utf-8') if isinstance(x, str) else x)
                 self._save_output(data)
             else:
                 pass
